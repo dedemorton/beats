@@ -219,5 +219,6 @@ Heartbeat is now ready to send log files to your defined output.
 
 //TODO: Add content about sample dashboards when the dashboards are available.
 
-:allplatforms:
-include::../../libbeat/docs/dashboards.asciidoc[]
+//:allplatforms:
+
+//include::../../libbeat/docs/dashboards.asciidoc[]
