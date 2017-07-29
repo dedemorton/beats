@@ -1,7 +1,7 @@
 [id="{beatname_lc}-getting-started"]
 == Getting started with {beatname_uc}
 
-//TODO: The getting started content needs to be changed to reflect changes in command-line syntax, dashboard loading, etc.
+//TODO: The getting started content needs to be changed to reflect changes in command-line syntax
 
 To get started with your own {beatname_uc} setup, install and configure these
 related products:
@@ -19,8 +19,9 @@ install, configure, and run {beatname_uc}:
 * <<{beatname_lc}-installation>>
 * <<{beatname_lc}-configuration>>
 * <<{beatname_lc}-template>>
+* <<load-kibana-dashboards>>
 * <<{beatname_lc}-starting>>
-* <<{beatname_lc}-sample-dashboards>>
+* <<view-kibana-dashboards>>
 * <<command-line-options>>
 * <<directory-layout>>
 
@@ -195,11 +196,10 @@ for example, `localhost:5601`.
 TIP: If you specify a path after the port number, you need to include
 the scheme and port: `http://localhost:5601/path`.
 
+Also see the security-related options in <<setup-kibana-endpoint>> if you are
+connecting to a secured instance of Kibana.
+
 --
-
-//TODO: Add link that mentions security settings and points to docs about setup.kibana for more info.
-
-//REVIEWERS: Wondering if I should protocol, username, and password in the example. We tend to leave that out, but not sure if that's the best thing to do.
 
 [id="{beatname_lc}-template"]
 === Step 3: Load the index template in Elasticsearch
@@ -207,8 +207,14 @@ the scheme and port: `http://localhost:5601/path`.
 :allplatforms:
 include::../../libbeat/docs/shared-template-load.asciidoc[]
 
+[[load-kibana-dashboards]]
+=== Step 4: Set up the Kibana dashboards
+
+:allplatforms:
+include::../../libbeat/docs/dashboards.asciidoc[]
+
 [id="{beatname_lc}-starting"]
-=== Step 4: Start {beatname_uc}
+=== Step 5: Start {beatname_uc}
 
 Run {beatname_uc} by issuing the appropriate command for your platform.
 
@@ -267,15 +273,18 @@ Elasticsearch instance.
 On Windows, if you don't have cURL installed, simply point your browser to the
 URL.
 
-[id="{beatname_lc}-sample-dashboards"]
-=== Step 5: Load sample Kibana dashboards
+[[view-kibana-dashboards]]
+=== Step 6: View the sample Kibana dashboards
 
 To make it easier for you to start auditing the activities of users and
 processes on your system, we have created sample {beatname_uc} dashboards.
+You loaded the dashboards earlier when you ran the `setup` command.
+
+include::../../libbeat/docs/opendashboards.asciidoc[]
+
 The dashboards are provided as examples. We recommend that you
 {kibana-ref}/dashboard.html[customize] them to meet your needs.
 
 image:./images/auditbeat-file-integrity-dashboard.png[Auditbeat File Integrity Dashboard]
 
-:allplatforms:
-include::../../libbeat/docs/dashboards.asciidoc[]
+
