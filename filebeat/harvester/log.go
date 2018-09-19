@@ -88,7 +88,9 @@ func createLineReader(
 func (h *Harvester) Harvest() {
 	defer func() {
 		// On completion, push offset so we can continue where we left off if we relaunch on the same file
-		h.Stat.Return <- h.GetOffset()
+		if h.Stat != nil {
+			h.Stat.Return <- h.GetOffset()
+		}
 
 		// Make sure file is closed as soon as harvester exits
 		// If file was never properly opened, it can't be closed
@@ -227,25 +229,31 @@ func (h *Harvester) openFile() (encoding.Encoding, error) {
 	var encoding encoding.Encoding
 
 	file, err = input.ReadOpen(h.Path)
-	if err == nil {
-		// Check we are not following a rabbit hole (symlinks, etc.)
-		if !input.IsRegularFile(file) {
-			return nil, errors.New("Given file is not a regular file.")
-		}
-
-		encoding, err = h.encoding(file)
-		if err != nil {
-
-			if err == transform.ErrShortSrc {
-				logp.Info("Initialising encoding for '%v' failed due to file being too short", file)
-			} else {
-				logp.Err("Initialising encoding for '%v' failed: %v", file, err)
-			}
-			return nil, err
-		}
-
-	} else {
+	if err != nil {
 		logp.Err("Failed opening %s: %s", h.Path, err)
+		return nil, err
+	}
+
+	// Closes file handler in case of follow up error
+	defer func() {
+		if err != nil {
+			file.Close()
+		}
+	}()
+
+	// Check we are not following a rabbit hole (symlinks, etc.)
+	if !input.IsRegularFile(file) {
+		return nil, errors.New("Given file is not a regular file.")
+	}
+
+	encoding, err = h.encoding(file)
+	if err != nil {
+
+		if err == transform.ErrShortSrc {
+			logp.Info("Initialising encoding for '%v' failed due to file being too short", file)
+		} else {
+			logp.Err("Initialising encoding for '%v' failed: %v", file, err)
+		}
 		return nil, err
 	}
 

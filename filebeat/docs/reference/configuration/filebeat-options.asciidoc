@@ -57,8 +57,10 @@ The following example configures Filebeat to drop any lines that start with "DBG
 
 [source,yaml]
 -------------------------------------------------------------------------------------
-exclude_lines: ["^DBG"]
+exclude_lines: ['^DBG']
 -------------------------------------------------------------------------------------
+
+See <<regexp-support>> for a list of supported regexp patterns.
 
 [[include-lines]]
 ===== include_lines
@@ -71,17 +73,24 @@ The following example configures Filebeat to export any lines that start with "E
 
 [source,yaml]
 -------------------------------------------------------------------------------------
-include_lines: ["^ERR", "^WARN"]
+include_lines: ['^ERR', '^WARN']
 -------------------------------------------------------------------------------------
 
-NOTE: If both `include_lines` and `exclude_lines` are defined, Filebeat executes `include_lines` first and then executes `exclude_lines`. So, for example, to export all Apache log lines except the debugging messages (DBGs), you can use:
+NOTE: If both `include_lines` and `exclude_lines` are defined, Filebeat executes `include_lines` first and then executes `exclude_lines`. 
+The order in which the two options are defined doesn't matter. The `include_lines` option will always be executed
+before the `exclude_lines` option, even if `exclude_lines` appears before `include_lines` in the config file. 
+
+The following example exports all Apache log lines except the debugging messages (DBGs):
 
 [source,yaml]
 -------------------------------------------------------------------------------------
- include_lines: ["apache"]
- exclude_lines: ["^DBG"]
+ include_lines: ['apache']
+ exclude_lines: ['^DBG']
 -------------------------------------------------------------------------------------
 
+See <<regexp-support>> for a list of supported regexp patterns.
+
+[[exclude-files]]
 ===== exclude_files
 
 A list of regular expressions to match the files that you want Filebeat to ignore. By default no files are excluded.
@@ -90,8 +99,10 @@ The following example configures Filebeat to ignore all the files that have a `g
 
 [source,yaml]
 -------------------------------------------------------------------------------------
-  exclude_files: [".gz$"]
+  exclude_files: ['\.gz$']
 -------------------------------------------------------------------------------------
+
+See <<regexp-support>> for a list of supported regexp patterns.
 
 [[configuration-fields]]
 ===== fields
@@ -176,7 +187,7 @@ The following example shows how to configure Filebeat to handle a multiline mess
 [source,yaml]
 -------------------------------------------------------------------------------------
 multiline:
-    pattern: ^\[
+    pattern: '^\['
     negate: true
     match: after
 
@@ -193,9 +204,11 @@ Filebeat takes all the lines that do not start with `[` and combines them with t
     at org.elasticsearch.action.admin.indices.delete.TransportDeleteIndexAction.checkBlock(TransportDeleteIndexAction.java:75)
 -------------------------------------------------------------------------------------
 
+See <<multiline-examples>> for more configuration examples.
+
 You specify the following settings under `multiline` to control how Filebeat combines the lines in the message:
 
-*`pattern`*:: Specifies the regular expression pattern to match.
+*`pattern`*:: Specifies the regular expression pattern to match. See <<regexp-support>> for a list of supported regexp patterns.
 
 *`negate`*:: Defines whether the pattern is negated. The default is `false`.
 
@@ -218,37 +231,11 @@ lines are discarded. The default is 500.
 
 *`timeout`*:: After the specified timeout, Filebeat sends the multiline event even if no new pattern is found to start a new event. The default is 5s.
 
-Here's an example configuration that shows the regular expression for a slightly more complex example:
-
-["source","sh",subs="attributes,callouts"]
--------------------------------------------------------------------------------------
-multiline:
-    pattern: "^[[:space:]]+(at|...)|^Caused by:"
-    negate: false
-    match: after
--------------------------------------------------------------------------------------
-
-In this example, the pattern matches the following lines:
-
-* a line that begins with spaces followed by the word `at` or `...`
-* a line that begins with the words `Caused by:`
-
-You could use this configuration to join the following lines from a Java stack trace into a single event:
-
-["source","sh",subs="attributes,callouts"]
--------------------------------------------------------------------------------------
-Exception in thread "main" java.lang.IllegalStateException: A book has a null property
-       at com.example.myproject.Author.getBookIds(Author.java:38)
-       at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
-Caused by: java.lang.NullPointerException
-       at com.example.myproject.Book.getId(Book.java:22)
-       at com.example.myproject.Author.getBookIds(Author.java:35)
-       ... 1 more
--------------------------------------------------------------------------------------
-
 ===== tail_files
 
 If this option is set to true, Filebeat starts reading new files at the end of each file instead of the beginning. When this option is used in combination with log rotation, it's possible that the first log entries in a new file might be skipped. The default setting is false.
+
+This option applies to files that Filebeat has not already processed. If you ran Filebeat previously and the state of the file was already persisted, `tail_files` will not apply. Harvesting will continue at the previous offset. To apply `tail_files` to all files, you must stop Filebeat and remove the registry file. Be aware that doing this removes ALL previous states.
 
 NOTE: You can use this setting to avoid indexing old log lines when you run Filebeat on a set of log files for the first time. After the first run, we recommend disabling this option, or you risk losing lines during file rotation.
 
@@ -364,6 +351,4 @@ include::../../../../libbeat/docs/outputconfig.asciidoc[]
 include::../../../../libbeat/docs/shipperconfig.asciidoc[]
 
 include::../../../../libbeat/docs/loggingconfig.asciidoc[]
-
-include::../../../../libbeat/docs/runconfig.asciidoc[]
 
