@@ -12,7 +12,15 @@ include::../../libbeat/docs/shared-getting-started-intro.asciidoc[]
 * <<setup-repositories>>
 
 [id="{beatname_lc}-installation"]
-=== Step 1: Download the {beatname_uc} command line tools and config files
+=== Step 1: Download and extract the {beatname_uc} package
+
+The {beatname_uc} package contains the command line tools, configuration file,
+and binary code required to run Beatless in your serverless environment. 
+
+To download and install the package, use the commands that work with your system
+(<<deb, deb>> for Debian/Ubuntu, <<rpm, rpm>> for Redhat/Centos/Fedora, <<mac,
+mac>> for OS X, <<docker, docker>> for any Docker platform, and <<win, win>> for
+Windows).
 
 [[deb]]
 *deb:*
@@ -103,32 +111,25 @@ ifeval::["{release-state}"!="unreleased"]
 . Download the {beatname_uc} Windows zip file from the
 https://www.elastic.co/downloads/beats/{beatname_lc}[downloads page].
 
-. Extract the contents of the zip file into `C:\Program Files`.
-
-. Rename the +{beatname_lc}-<version>-windows+ directory to +{beatname_uc}+.
-
-. Open a PowerShell prompt as an Administrator (right-click the PowerShell icon and select *Run As Administrator*).
-
-. From the PowerShell prompt, run the following commands to install {beatname_uc} as a
-Windows service:
-+
-["source","sh",subs="attributes"]
-----------------------------------------------------------------------
-PS > cd 'C:{backslash}Program Files{backslash}{beatname_uc}'
-PS C:{backslash}Program Files{backslash}{beatname_uc}> .{backslash}install-service-{beatname_lc}.ps1
-----------------------------------------------------------------------
-
-NOTE: If script execution is disabled on your system, you need to set the execution policy for the current session to allow the script to run. For example: +PowerShell.exe -ExecutionPolicy UnRestricted -File .\install-service-{beatname_lc}.ps1+.
+. Extract the contents of the zip file. 
 
 endif::[]
 
 [id="{beatname_lc}-configuration"]
 === Step 2: Configure {beatname_uc}
 
-include::../../libbeat/docs/shared-configuring.asciidoc[]
+Before pushing {beatname_uc} to your serverless environment, you specify
+settings in the configuration file to define the function name, type, and
+triggers that will be used to invoke the function. You also configure any
+additional processing (such as processors) that you want to apply, and you
+specify connection details for your {es} cluster.
 
-Here is a sample of the +{beatname_lc}+ section of the +{beatname_lc}.yml+ file.
-{beatname_uc} uses predefined default values for most configuration options.
+TIP: See the
+{libbeat}/config-file-format.html[Config File Format] section of the
+_Beats Platform Reference_ for more about the structure of the config file.
+
+The following example configures a function called `myfunction` that collects
+events from Cloudwatch Logs and forwards the events to {es}.
 
 ["source","sh",subs="attributes"]
 -------------------------------------------------------------------------------------
