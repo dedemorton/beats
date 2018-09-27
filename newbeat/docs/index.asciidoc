@@ -1,4 +1,4 @@
-= Newbeat Reference
+= Beatname Reference
 
 include::../../libbeat/docs/version.asciidoc[]
 
@@ -6,7 +6,7 @@ include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
 :version: {stack-version}
 :beatname_lc: newbeat
-:beatname_uc: Newbeat
+:beatname_uc: Beatname
 :beatname_pkg: {beatname_lc}
 :github_repo_name: beats
 :discuss_forum: beats/{beatname_lc}
@@ -32,10 +32,8 @@ include::./configuring-howto.asciidoc[]
 
 include::./fields.asciidoc[]
 
-//requires elasticsearch-output and configuration-ssl
 include::../../libbeat/docs/monitoring/monitoring-beats.asciidoc[]
 
-//requires monitoring, ssl-client-fails, keystore, and configuration-ssl
 include::../../libbeat/docs/shared-securing-beat.asciidoc[]
 
 include::./troubleshooting.asciidoc[]

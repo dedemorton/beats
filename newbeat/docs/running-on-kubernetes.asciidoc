@@ -1,6 +1,6 @@
 [id="running-{beatname_lc}-on-kubernetes"]
 === Running {beatname_uc} on Kubernetes
 
-// TODO: Determine if the content from Filebeat can be reused here.
+// TODO: Determine if the content from Beatname can be reused here.
 
 ADD CONTENT HERE.

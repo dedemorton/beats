@@ -22,20 +22,20 @@ The following topics describe how to configure {beatname_uc}:
 * <<configuration-{beatname_lc}-options>>
 * <<configuration-general-options>>
 * <<configuring-internal-queue>>
-//* <<configuring-output>>
-//* <<configuration-ssl>>
-//* <<filtering-and-enhancing-data>>
-//* <<configuring-ingest-node>>
-//* <<configuration-path>>
-//* <<setup-kibana-endpoint>>
-//* <<configuration-dashboards>>
-//* <<configuration-template>>
-//* <<configuration-logging>>
-//* <<using-environ-vars>>
+* <<configuring-output>>
+* <<configuration-ssl>>
+* <<filtering-and-enhancing-data>>
+* <<configuring-ingest-node>>
+* <<configuration-path>>
+* <<setup-kibana-endpoint>>
+* <<configuration-dashboards>>
+* <<configuration-template>>
+* <<configuration-logging>>
+* <<using-environ-vars>>
 //* <<configuration-autodiscover>>
-//* <<yaml-tips>>
-//* <<regexp-support>>
-//* <<http-endpoint>>
+* <<yaml-tips>>
+* <<regexp-support>>
+* <<http-endpoint>>
 //* <<{beatname_lc}-reference-yml>>
 
 --
