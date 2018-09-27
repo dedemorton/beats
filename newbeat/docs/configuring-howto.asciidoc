@@ -22,20 +22,20 @@ The following topics describe how to configure {beatname_uc}:
 * <<configuration-{beatname_lc}-options>>
 * <<configuration-general-options>>
 * <<configuring-internal-queue>>
-//* <<configuring-output>>
-//* <<configuration-ssl>>
-//* <<filtering-and-enhancing-data>>
-//* <<configuring-ingest-node>>
-//* <<configuration-path>>
-//* <<setup-kibana-endpoint>>
-//* <<configuration-dashboards>>
-//* <<configuration-template>>
-//* <<configuration-logging>>
-//* <<using-environ-vars>>
+* <<configuring-output>>
+* <<configuration-ssl>>
+* <<filtering-and-enhancing-data>>
+* <<configuring-ingest-node>>
+* <<configuration-path>>
+* <<setup-kibana-endpoint>>
+* <<configuration-dashboards>>
+* <<configuration-template>>
+* <<configuration-logging>>
+* <<using-environ-vars>>
 //* <<configuration-autodiscover>>
-//* <<yaml-tips>>
-//* <<regexp-support>>
-//* <<http-endpoint>>
+* <<yaml-tips>>
+* <<regexp-support>>
+* <<http-endpoint>>
 //* <<{beatname_lc}-reference-yml>>
 
 --
@@ -48,11 +48,8 @@ include::./general-options.asciidoc[]
 include::../../libbeat/docs/queueconfig.asciidoc[]
 :allplatforms!:
 
-//requires libbeat-configuration-fields,configuration-dashboards, load-template-manually
-//securing-newbeat, configuration-template
 include::../../libbeat/docs/outputconfig.asciidoc[]
 
-//requires setup-kibana-endpoint, configuring-ssl-logstash, and configuring-output
 include::../../libbeat/docs/shared-ssl-config.asciidoc[]
 
 include::./filtering.asciidoc[]
@@ -85,5 +82,6 @@ include::../../libbeat/docs/regexp.asciidoc[]
 include::../../libbeat/docs/http-endpoint.asciidoc[]
 
 // TODO: Uncomment the following include statement when the reference yaml file
-// is available in the repo.  
+// is available in the repo. Also uncomment the link in the jump list at the top
+// of this file.
 //include::../../libbeat/docs/reference-yml.asciidoc[]

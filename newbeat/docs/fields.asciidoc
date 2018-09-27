@@ -3,13 +3,18 @@
 This file is generated! See _meta/fields.yml and scripts/generate_field_docs.py
 ////
 
+////
+This file will get updated with the fields from your Beat when you run
+make update.
+////
+
 [[exported-fields]]
 = Exported fields
 
 [partintro]
 
 --
-This document describes the fields that are exported by Filebeat. They are
+This document describes the fields that are exported by Beatname. They are
 grouped in the following categories:
 
 * <<exported-fields-apache2>>
@@ -2893,7 +2898,7 @@ deprecated[6.3]
 
 required: True
 
-The input type from which the event was generated. This field is set to the value specified for the `type` option in the input section of the Filebeat config file. (DEPRECATED: see `input.type`)
+The input type from which the event was generated. This field is set to the value specified for the `type` option in the input section of the Beatname config file. (DEPRECATED: see `input.type`)
 
 
 --
@@ -2903,7 +2908,7 @@ The input type from which the event was generated. This field is set to the valu
 --
 required: True
 
-The input type from which the event was generated. This field is set to the value specified for the `type` option in the input section of the Filebeat config file.
+The input type from which the event was generated. This field is set to the value specified for the `type` option in the input section of the Beatname config file.
 
 
 --
@@ -2919,7 +2924,7 @@ In case the ingest pipeline parses the timestamp from the log contents, it store
 *`fileset.module`*::
 +
 --
-The Filebeat module that generated this event.
+The Beatname module that generated this event.
 
 
 --
@@ -2927,7 +2932,7 @@ The Filebeat module that generated this event.
 *`fileset.name`*::
 +
 --
-The Filebeat fileset that generated this event.
+The Beatname fileset that generated this event.
 
 
 --
@@ -3049,7 +3054,7 @@ This field contains the flags of the event.
 --
 type: date
 
-event.created contains the date on which the event was created. In case of log events this is when the log line was read by Filebeat. In comparison @timestamp is the processed timestamp from the log line. If both are identical only @timestamp should be used.
+event.created contains the date on which the event was created. In case of log events this is when the log line was read by Beatname. In comparison @timestamp is the processed timestamp from the log line. If both are identical only @timestamp should be used.
 
 
 --

@@ -38,3 +38,4 @@ ADD EXAMPLES SPECIFIC TO THE BEAT, OR DELETE THIS SECTION
 
 :processor-scope: input
 include::../../libbeat/docs/processors-using.asciidoc[]
+:processor-scope!:
