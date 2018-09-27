@@ -30,4 +30,11 @@ include::../../libbeat/docs/processors.asciidoc[]
 
 ADD EXAMPLES SPECIFIC TO THE BEAT, OR DELETE THIS SECTION
 
+// You must set the processor-scope attribute to resolve the attribute reference
+// defined in processors-using.asciidoc. The attribute is used to indicate where
+// processors are valid. If processors are valid in more than two locations
+// (root and :processor-scope:), you need to add a conditionally coded section
+// to processors-using.asciidoc.
+
+:processor-scope: input
 include::../../libbeat/docs/processors-using.asciidoc[]

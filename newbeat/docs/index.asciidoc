@@ -33,10 +33,10 @@ include::./configuring-howto.asciidoc[]
 include::./fields.asciidoc[]
 
 //requires elasticsearch-output and configuration-ssl
-//include::../../libbeat/docs/monitoring/monitoring-beats.asciidoc[]
+include::../../libbeat/docs/monitoring/monitoring-beats.asciidoc[]
 
 //requires monitoring, ssl-client-fails, keystore, and configuration-ssl
-//include::../../libbeat/docs/shared-securing-beat.asciidoc[]
+include::../../libbeat/docs/shared-securing-beat.asciidoc[]
 
 include::./troubleshooting.asciidoc[]
 

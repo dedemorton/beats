@@ -20,6 +20,7 @@ _{libbeat_docs}_ for more about the structure of the config file.
 The following topics describe how to configure {beatname_uc}:
 
 * <<configuration-{beatname_lc}-options>>
+* <<configuration-general-options>>
 * <<configuring-internal-queue>>
 //* <<configuring-output>>
 //* <<configuration-ssl>>
@@ -41,31 +42,36 @@ The following topics describe how to configure {beatname_uc}:
 
 include::./config-options.asciidoc[]
 
+include::./general-options.asciidoc[]
+
 :allplatforms:
 include::../../libbeat/docs/queueconfig.asciidoc[]
+:allplatforms!:
 
-//include::../../libbeat/docs/outputconfig.asciidoc[]
+//requires libbeat-configuration-fields,configuration-dashboards, load-template-manually
+//securing-newbeat, configuration-template
+include::../../libbeat/docs/outputconfig.asciidoc[]
 
-//include::../../libbeat/docs/shared-ssl-config.asciidoc[]
+//requires setup-kibana-endpoint, configuring-ssl-logstash, and configuring-output
+include::../../libbeat/docs/shared-ssl-config.asciidoc[]
 
-//TODO: You must add a conditionally-coded 
-//include::./filtering.asciidoc[]
+include::./filtering.asciidoc[]
 
-//include::../../libbeat/docs/shared-config-ingest.asciidoc[]
+include::../../libbeat/docs/shared-config-ingest.asciidoc[]
 
-//include::../../libbeat/docs/shared-path-config.asciidoc[]
+include::../../libbeat/docs/shared-path-config.asciidoc[]
 
-//include::../../libbeat/docs/shared-kibana-config.asciidoc[]
+include::../../libbeat/docs/shared-kibana-config.asciidoc[]
 
-//include::../../libbeat/docs/setup-config.asciidoc[]
+include::../../libbeat/docs/setup-config.asciidoc[]
 
-//include::../../libbeat/docs/loggingconfig.asciidoc[]
+include::../../libbeat/docs/loggingconfig.asciidoc[]
 
 :standalone:
 include::../../libbeat/docs/shared-env-vars.asciidoc[]
 :standalone!:
 
-//requires conditions
+//OPEN ISSUE: DO WE NEED AUTODISCOVER?
 //include::../../libbeat/docs/shared-autodiscover.asciidoc[]
 
 :standalone:
@@ -78,5 +84,6 @@ include::../../libbeat/docs/regexp.asciidoc[]
 
 include::../../libbeat/docs/http-endpoint.asciidoc[]
 
-//TODO: Uncomment when this file is available in the repo
+// TODO: Uncomment the following include statement when the reference yaml file
+// is available in the repo.  
 //include::../../libbeat/docs/reference-yml.asciidoc[]
