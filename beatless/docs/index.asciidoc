@@ -33,7 +33,7 @@ include::./configuring-howto.asciidoc[]
 
 include::./fields.asciidoc[]
 
-include::../../libbeat/docs/monitoring/monitoring-beats.asciidoc[]
+//include::../../libbeat/docs/monitoring/monitoring-beats.asciidoc[]
 
 include::../../libbeat/docs/shared-securing-beat.asciidoc[]
 

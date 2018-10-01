@@ -12,9 +12,7 @@ include::../../libbeat/docs/shared-getting-started-intro.asciidoc[]
 * <<setup-repositories>>
 
 [id="{beatname_lc}-installation"]
-=== Step 1: Install {beatname_uc}
-
-include::../../libbeat/docs/shared-download-and-install.asciidoc[]
+=== Step 1: Download the {beatname_uc} command line tools and config files
 
 [[deb]]
 *deb:*
