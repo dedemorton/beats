@@ -32,4 +32,4 @@ output.elasticsearch:
   host: abc
   username: elastic
   password: abc123
----
+----
