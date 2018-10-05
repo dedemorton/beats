@@ -22,7 +22,7 @@ global processing across all data exported by {beatname_uc}.
 [[using-processors]]
 === Processors
 
-include::../../libbeat/docs/processors.asciidoc[]
+include::{libbeat-dir}/docs/processors.asciidoc[]
 
 [float]
 [[specific-example]]
@@ -37,5 +37,5 @@ ADD EXAMPLES SPECIFIC TO THE BEAT, OR DELETE THIS SECTION
 // to processors-using.asciidoc.
 
 :processor-scope: input
-include::../../libbeat/docs/processors-using.asciidoc[]
+include::{libbeat-dir}/docs/processors-using.asciidoc[]
 :processor-scope!:

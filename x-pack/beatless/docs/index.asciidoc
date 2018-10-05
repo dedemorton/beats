@@ -1,6 +1,8 @@
 = Beatless Reference
 
-include::../../libbeat/docs/version.asciidoc[]
+:libbeat-dir: ../../../libbeat
+
+include::{libbeat-dir}/docs/version.asciidoc[]
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
@@ -15,7 +17,7 @@ include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 :libbeat-docs: Beats Platform Reference
 :only-elasticsearch:
 
-include::../../libbeat/docs/shared-beats-attributes.asciidoc[]
+include::{libbeat-dir}/docs/shared-beats-attributes.asciidoc[]
 
 :release-state: released
 
@@ -23,7 +25,7 @@ include::./overview.asciidoc[]
 
 include::./getting-started.asciidoc[]
 
-include::../../libbeat/docs/repositories.asciidoc[]
+include::{libbeat-dir}/docs/repositories.asciidoc[]
 
 include::./setting-up-running.asciidoc[]
 
@@ -33,9 +35,9 @@ include::./configuring-howto.asciidoc[]
 
 include::./fields.asciidoc[]
 
-include::../../libbeat/docs/monitoring/monitoring-beats.asciidoc[]
+include::{libbeat-dir}/docs/monitoring/monitoring-beats.asciidoc[]
 
-include::../../libbeat/docs/shared-securing-beat.asciidoc[]
+include::{libbeat-dir}/docs/shared-securing-beat.asciidoc[]
 
 include::./troubleshooting.asciidoc[]
 
