@@ -15,7 +15,7 @@ include::{libbeat-dir}/docs/shared-getting-started-intro.asciidoc[]
 === Step 1: Download the {beatname_uc} package
 
 The {beatname_uc} package contains the command line tools, configuration file,
-and binary code required to run Beatless in your serverless environment. 
+and binary code required to run {beatname_uc} in your serverless environment. 
 
 To download and extract the package, use the commands that work with your system
 (<<deb, deb>> for Debian/Ubuntu, <<rpm, rpm>> for Redhat/Centos/Fedora, <<mac,
@@ -129,31 +129,7 @@ TODO: Pare down this example.
 
 ["source","sh",subs="attributes"]
 -------------------------------------------------------------------------------------
-{beatname_lc}.provider.aws:
-  functions:
-    - name: ph
-      type: cloudwatch_logs
-      triggers:
-        - log_group_name: /aws/lambda/TestingCloudwatchlogs
-          filter_name: myfilter
-cloud.id: ${cloud_id}
-cloud.auth: ${cloud_auth}
-
-output.elasticsearch:
-  enabled: true
-  hosts:
-
-# Disable anything that could be send to disk
-path.data: /tmp
-path.logs: /tmp/logs
-logging.to_stderr: true
-logging.to_files: false
-logging.level: debug
-setup.template.enabled: true
-queue.mem:
-  events: 50
-  flush.min_events: 1
-  flush.timeout: 0.5s
+ADD EXAMPLE FROM PH'S PR.
 -------------------------------------------------------------------------------------
 
 To configure {beatname_uc}:
@@ -195,13 +171,16 @@ include::{libbeat-dir}/docs/dashboards.asciidoc[]
 
 Before deploying functions to your serverless environment, make sure you're
 logged in with the credentials required by your cloud service provider and that
-the logged in user has the privileges (?) required to ???? (deploy and run
+the user has the privileges (?) required to ???? (deploy and run
 functions?)
 
 The following command deploys the function named `myfunction`. See xxx for more
 information about the `deploy` command.
 
 //QUESTION: Which flags do we want to show in the example here? debug selectors?
+
+// QUESTION: What happens to the Lambda function running on Amazon if you change
+// the configuration after deploying the function? 
 
 *deb:*
 
@@ -234,7 +213,7 @@ PS C:{backslash}Program Files{backslash}{beatname_uc}> Start-Service {beatname_l
 
 By default, Windows log files are stored in +C:\ProgramData\{beatname_lc}\Logs+.
 
-{beatname_uc} is now ready to send log files to your defined output.
+{beatname_uc} is now ready to send log files to the output.
 
 [[view-kibana-dashboards]]
 === Step 6: View the sample Kibana dashboards

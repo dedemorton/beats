@@ -1,4 +1,7 @@
 [id="how-{beatname_lc}-works"]
 == How {beatname_uc} works
 
-DESCRIBE HOW THE BEAT WORKS.
+Runs as a function in your serverless environment. 
+
+// Not sure if we want a separate topic here, or if we should add this description
+// to the overview. 
