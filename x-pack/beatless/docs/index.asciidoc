@@ -1,4 +1,4 @@
-= Beatless Reference
+= Functionbeat Reference
 
 :libbeat-dir: ../../../libbeat
 
@@ -7,8 +7,8 @@ include::{libbeat-dir}/docs/version.asciidoc[]
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
 :version: {stack-version}
-:beatname_lc: beatless
-:beatname_uc: Beatless
+:beatname_lc: functionbeat
+:beatname_uc: Functionbeat
 :beatname_pkg: {beatname_lc}
 :github_repo_name: beats
 :discuss_forum: beats/{beatname_lc}
@@ -29,7 +29,8 @@ include::{libbeat-dir}/docs/repositories.asciidoc[]
 
 include::./setting-up-running.asciidoc[]
 
-include::./how-it-works.asciidoc[]
+//TODO: Decide whether we want a separate topic to explain how fucntionbeat works
+//include::./how-it-works.asciidoc[]
 
 include::./configuring-howto.asciidoc[]
 
