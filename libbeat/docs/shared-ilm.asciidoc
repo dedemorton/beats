@@ -1,0 +1,125 @@
+[[ilm]]
+[role="xpack"]
+=== Enable index lifecycle management
+
+NOTE: This feature requires a basic license or higher.
+
+The index template provided by {beatname_uc} includes a default
+{ref}/getting-started-index-lifecycle-management.html[index lifecycle
+management] (ILM) policy that you can use to manage the lifecycle of
+{beatname_uc} indices as they age. When enabled, the default policy is applied
+to any new indices created by {beatname_uc}. The policy specifies actions to
+perform on the index as it ages. For example, the policy automates a rollover to
+a new index when the existing index reaches a specified size or age. You can
+update the policy to modify the lifecycle of both new and existing indices. 
+
+By default, the policy is disabled (not loaded). To enable it, set
+`ilm.enabled: true` in the {es} output configuration. For example:
+
+[source,yaml]
+------------------------------------------------------------------------------
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+  ilm.enabled: true
+------------------------------------------------------------------------------
+
+This configuration overwrites your index settings and adjusts the {beatname_uc}
+template to use the correct settings for index lifecycle management.
+
+NOTE: If you've previously loaded the index template for this version into {es}, 
+you must overwrite the template.
+
+The default used for the rollover alias ` is +{beatname_lc}-\{beat.version\}+.
+You cannot remove `{beat.version}` from the rollover alias name, but you can
+change the prefix to adjust the name of the rollover indices. The default
+pattern used for the rollover index is `%7Bnow%2Fd%7D-000001`. You can change
+the pattern by setting `ilm.pattern`. For example:
+
+["source","yaml",subs="attributes"]
+----
+output.elasticsearch:
+  hosts: ["localhost"]
+  ilm.enabled: true
+  ilm.rollover_alias: "{beatname_lc}"
+  ilm.pattern: "%7Bnow%2Fd%7D-000001" <1>
+----
+<1> Date math is supported here, but special characters must be escaped. For
+more information, see
+{ref}/indices-rollover-index.html#_using_date_math_with_the_rollover_api[the
+rollover docs].
+
+NOTE: If you modify the `rollover_alias` or `pattern` settings and you've
+previously loaded the index template, you must overwrite the template to apply
+the changes.
+
+//TODO: Test this.
+
+To modify the default policy, edit it in the *Index lifecycle policies* UI in
+{kib}. If you aren't using {kib}, you can run +{beatname_lc} export ilm-policy+
+to print the policy to stdout, then run +{beatname_lc} setup --ilm-policy+  to
+load the policy manually.
+
+//REVIEWERS: Is the above statement correct? I think it's better to recommend
+//Kibana as the right way to do things, but provide manual steps if the user
+//does not want to use the Kibana UI. 
+
+==== Expert settings
+
+WARNING: In general we only recommend you to modify the settings below if you
+know what you are doing.
+
+The default ILM settings work best for common use cases that use the automated
+alias setup described earlier. It is possible to for example use multiple write alias
+with dynamic index patterns but it requires manual setup of the write alias.
+Here is a guide on the configuration options you need to change.
+
+Let's assume you have an index pattern `foo-%{event.module}` where `event.module`
+can have the values `system` and `apache`. First you must set
+up a rollover index for `foo-system` and `foo-apache`. For details on
+how to do this, see
+{ref}/indices-rollover-index.html#_using_date_math_with_the_rollover_api[Rollover
+Index docs]. 
+
+Next, set the index pattern in the {es} output. For example:
+
+["source","yaml",subs="attributes"]
+----
+output.elasticesarch.index: foo-%{event.module} <1>
+----
+<1> For this example to work, every event must contain `event.module`.
+
+If you change the index name, you must also set the template name, template
+pattern, rollover alias, and lifecycle name. The best way to set these is
+through an {es} template. It's possible to disable the template loading in
+{beatname_uc} and specify these settings in your own template. Otherwise, you
+can use the following config options in {beatname_uc}:
+
+[source,yaml]
+----
+setup.template.name: "customname"
+setup.template.pattern: "customname-*"
+setup.template.settings.index.lifecycle.rollover_alias: "customname"
+setup.template.settings.index.lifecycle.name: "customname-default-policy"
+----
+
+This configuration results in a managed index named something like
++customname-{localdate}-000001+ and the following index settings:
+
+["source","shell"]
+----
+"aliases" : {
+  "customname" : {
+    "is_write_index" : true
+  }
+},
+...
+  "index" : {
+    "lifecycle" : {
+      "name" : "customname-default-policy",
+      "rollover_alias" : "customname"
+    },    
+----
+
+IMPORTANT: If you set the options manually as shown in this example, do *not*
+set `ilm.enabled`, or the settings specified in the configuration file will be
+overwritten.
