@@ -79,12 +79,12 @@ rollover indices:
 --
 ["source","sh",subs="attributes"]
 ---------------------------------------------------------------
-POST _xpack/security/role/{beatname_lc}_ilm
+POST _xpack/security/role/{beat_default_index_prefix}_ilm
 {
   "cluster": ["manage_ilm"],
   "indices": [
     {
-      "names": [ "{beatname_lc}-*","shrink-{beatname_lc}-*"],
+      "names": [ "{beat_default_index_prefix}-*","shrink-{beat_default_index_prefix}-*"],
       "privileges": ["write","create_index","manage","manage_ilm"]
     }
   ]
@@ -92,11 +92,20 @@ POST _xpack/security/role/{beatname_lc}_ilm
 ---------------------------------------------------------------
 // CONSOLE
 --
++
+IMPORTANT: Starting with {es} 7.0.0, index lifecycle management is enabled by
+default. You must either create this role and assign it the internal {beatname_uc}
+user, or you must disable index lifecycle management.
 endif::no_ilm[]
 
-. Assign the writer role to the user that {beatname_uc} will use to connect to
-{es}. Make sure you also assign any roles that are required for specific
-features. For the list of features and required roles, see <<feature-roles>>.
+. Assign the writer role to the user that {beatname_uc} will use to
+connect to {es}. Make sure you also assign any roles that are required for
+specific features.
+ifndef::no_ilm[]
+If you have not disabled index lifecycle management, make sure you also assign
+the ilm role.
+endif::no_ilm[]
+For the list of features and required roles, see <<feature-roles>>. 
 
 .. To authenticate as a native user, create a user for {beatname_uc} to use
 internally and assign it the writer role, plus any other roles that are
@@ -107,6 +116,7 @@ You can create users from the **Management / Users** UI in {kib} or through the
 named ++{beat_default_index_prefix}_internal++ that has the
 ++{beat_default_index_prefix}_writer++ and `kibana_user` roles:
 +
+ifndef::no_ilm[]
 --
 ["source","sh",subs="attributes,callouts"]
 ---------------------------------------------------------------
@@ -120,11 +130,40 @@ POST /_security/user/{beat_default_index_prefix}_internal
 // CONSOLE
 
 --
+endif::no_ilm[]
+ifdef::no_ilm[]
+--
+["source","sh",subs="attributes,callouts"]
+---------------------------------------------------------------
+POST /_security/user/{beat_default_index_prefix}_internal
+{
+  "password" : "{pwd}",
+  "roles" : [ "{beat_default_index_prefix}_writer","kibana_user","{beat_default_index_prefix}_ilm"],
+  "full_name" : "Internal {beatname_uc} User"
+}
+---------------------------------------------------------------
+// CONSOLE
+
+--
+endif::no_ilm[]
 
 .. To use PKI authentication, assign the writer role, plus any other roles that are
 needed, in the `role_mapping.yml` configuration file. Specify the user by the
 distinguished name that appears in its certificate:
 +
+ifndef::no_ilm[]
+--
+["source","yaml",subs="attributes,callouts"]
+---------------------------------------------------------------
+{beat_default_index_prefix}_writer:
+  - "cn=Internal {beatname_uc} User,ou=example,o=com"
+{beat_default_index_prefix}_ilm:
+  - "cn=Internal {beatname_uc} User,ou=example,o=com"
+kibana_user:
+  - "cn=Internal {beatname_uc} User,ou=example,o=com"
+---------------------------------------------------------------
+endif::no_ilm[]
+ifdef::no_ilm[]
 --
 ["source","yaml",subs="attributes,callouts"]
 ---------------------------------------------------------------
@@ -133,7 +172,7 @@ distinguished name that appears in its certificate:
 kibana_user:
   - "cn=Internal {beatname_uc} User,ou=example,o=com"
 ---------------------------------------------------------------
-
+endif::no_ilm[]
 
 For more information, see
 {xpack-ref}/mapping-roles.html#mapping-roles-file[Using Role Mapping Files].
