@@ -20,12 +20,8 @@ configuration and exported fields. Please review the <<release-notes,release
 notes>> for potential exceptions.
 
 Upgrading between non-consecutive major versions (e.g. 5.x to 7.x) is not
-supported. If you are on version 1.x of the Beats, we recommend first upgrading
-to ?.?.
-
-// REVIEWERS: Any specific recommendations for upgrading to a specific version
-// before upgrading to 7.x? I'm not sure we want to even talk about 1.x at this
-// point because it's been EOL for so long. 
+supported. If you are on version 6.6 or lower, we recommend first upgrading to
+6.7.
 
 [[upgrading-6-to-7]]
 === Upgrade from 6.x to 7.x
@@ -40,48 +36,77 @@ If you are planning an upgrade of the full stack ({es}, {kib}, or
 We recommend that you fully upgrade {es} and {kib} to version 7.0
 before upgrading Beats.
 
-// REVIEWERS: Is there a min 6.x version that users need to upgrade to *before*
-// upgrading to 7.0?
-//
-// If so, I'll add this:
-//
-// If you are on a Beats 6.x version lower than 6.?, 
-// follow the <<upgrading-to-6.?>> section *before* doing the {es} upgrade.
+If you are on a Beats 6.x version lower than 6.7, follow the
+<<upgrading-to-6.7>> section *before* doing the {es} upgrade.
 
+[[upgrading-to-6.7]]
+==== Upgrade to 6.7 before upgrading to 7.0
 
-// REVIEWERS: What is the minimum version of 6.x that still runs with 7.0 stack?
+The upgrade procedure assumes that you have Beats 6.7 installed. If you are on a
+previous 6.x version of Beats, upgrade to version 6.7 first. This is required
+because the {es} mapping template in 6.7 was modified to be compatible with {es}
+7.0 (the `_type` setting changed from `doc` to `_doc`).
 
-If you're not ready to upgrade {es} and {kib} to 7.0, that's alright.
-Beats version 7.0 works with {es} and {kib} version 6.?, so you can
-upgrade Beats now and the rest of the stack later.
+For this reason, after upgrading to 6.7, verify that the 6.7 template is loaded.
+You can do this by temporarily enabling the
+`output.elasticsearch.template.overwrite` setting, for example with Metricbeat:
 
-[[upgrading-to-6.?]]
-==== Upgrade to 6.?
+[source,shell]
+----
+metricbeat -e -E output.elasticsearch.template.overwrite=true
+----
 
-// REVIEWERS: Do users need to upgrade to a specific version of Beats before
-// upgrading to 7.0? If so, why? I'm assuming the ECS field migration will have
-// some affect, but not sure how having aliases affects our recommendations.
+Or you can manually force loading the template:
 
-The upgrade procedure assumes that you have Beats version 6.? installed. If you
-are on a previous 6.x version of Beats, upgrade to version 6.? first.
+[source,shell]
+----
+curl -XPUT -H'Content-Type: application/json'  http://localhost:9200/_template/metricbeat -d @metricbeat.template.json
+----
 
-// TODO: If there is a requirement to upgrade to 6.? here, add reason and any
-// specific steps users need to perform. For example, does the user need to
-// set template.overwrite=true so the template gets upgraded?
+To check the template version, open the {kib} Console and run:
+
+[source,js]
+----
+GET /_template/metricbeat
+----
+// CONSOLE
+
+Look for the version string in the response.
+
+Verify the template version for every Beat running in your environment.
+
+*Metricbeat and Filebeat users:* If you use Beats central management,
+migrate the Beats central management index to 6.7 before you upgrade to 7.0. For
+more information, see <<breaking-changes-6.7>>.
 
 ==== Migrate configuration files
 
 // REVIEWERS: What changes do users need to make to their config files? Will we
-// offer any kidn of migration tool?
+// offer any kind of migration tool?
 
 Beats 7.0 comes with several backwards incompatible configuration changes.
 Before upgrading, review the <<breaking-changes-7.0>> document. Where possible,
-we kept the old configuration options working, but deprecated them.  However,
+we kept the old configuration options working, but deprecated them. However,
 deprecation was not always possible, so if you use any of the settings mentioned
 in the Breaking Changes section of the release notes, make sure you understand
 the alternatives that we provide.
 
-===== Registry format change
+[[migrate-ecs]]
+==== Migrate fields to use the Elastic Common Schema (ECS)
+
+Starting with 7.0, the fields exported by Beats conform to the Elastic Common
+Schema (ECS). Many of the exported fields have been renamed. See 
+{platform-ref}/breaking-changes-7.0.html[Breaking changes in 7.0] for the full
+list of changed names.
+
+To help you transition to the new fields, we provide aliases that map the old
+fields to new ECS fields. To use the aliases, set
+`migration.6_to_7.enabled: true` in the Beat's configuration file.
+
+You must set this option if you want to use pre-7.0 dashboards and
+visualizations with data shipped by Beats 7.0 or later.
+
+==== Migrate Filebeat registry format
 
 Starting with the 7.0 version, {filebeat} stores its registry in a directory
 structure. 
@@ -89,11 +114,11 @@ structure.
 // TODO: Describe how to use filebeat.registry.migrate_file to point to the old
 // registry file if filebeat.registry.path has changed.
 
-==== Dashboard upgrades
+==== Upgrade dashboards
 
-We recommend re-importing the {kib} dashboards after the Beats and {kib}
-upgrades are complete. This way, you will take advantage of the new Beats
-dashboards created for the 7.0 release.
+We recommend re-importing the {kib} dashboards after upgrading {kib} and Beats.
+This way, you can take advantage of the new Beats dashboards created for the
+7.0 release.
 
 See <<breaking-changes-import-dashboards>> in the Breaking Changes
 documentation.
@@ -102,27 +127,40 @@ NOTE: If you've modified the Beats dashboards manually, reimporting them will
 overwrite your changes. Consider saving your dashboards under new IDs, so
 that the reimport doesn't overwrite them.
 
-//REVIEWERS: Is still an issue? I thought dashboards were versioned.
+*Metricbeat users:* If you plan to run Metricbeat 6.7 and 7.0 in parallel, set
+`migration.6_to_7.enabled: true` and save your old dashboards under a new ID.
+Otherwise your older dashboards will not work as expected.
+
+==== Configure {ls} to use versioned templates and indices
+
+Before upgrading to 7.0, make sure {ls} uses versioned templates and indices. 
+Otherwise, after you upgrade, {ls} will stop ingesting data because of field
+conflicts.
+
+For the recommended {ls} configuration, see the
+{logstash-ref}/plugins-inputs-beats.html[Beats input plugin] documentation.
+
+==== Should we mention the central management config changes?
+
 
 [[upgrade-mapping-template]]
 === Upgrade the {es} mapping template
 
 Mapping templates and the default index names are versioned. For example,
-Metricbeat 7.0.0 typically creates indices like this:
+Metricbeat {stack-version} typically creates indices like this:
 
 ["source","sh",subs="attributes"]
 ------------------------------------------------------------------------------
-metricbeat-7.0.0-{localdate}
+metricbeat-{stack-version}-{localdate}
 ------------------------------------------------------------------------------
 
-And the corresponding {es} template is named `metricbeat-7.0.0`.
+And the corresponding {es} template is named +metricbeat-{stack-version}+.
 
 This means that each version of the Beat creates a new index, and it is
-guaranteed that the correct template for that version is applied.  With these
+guaranteed that the correct template for that version is applied. With these
 changes in place, you generally don't have to do anything to upgrade the mapping
 template when you move to a new version.
 
-// REVIEWERS: Are there any exceptions that require extra steps here
 
 // REVIEWERS: I'm not sure what the following paragraph means. Why would this
 // result in downtime?
