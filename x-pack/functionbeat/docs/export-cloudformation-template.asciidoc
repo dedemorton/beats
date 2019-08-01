@@ -1,0 +1,24 @@
+[[export-cloudformation-template]]
+[role="xpack"]
+=== Export AWS CloudFormation template
+
+You can use {beatname_uc} to export an
+https://aws.amazon.com/cloudformation/[AWS CloudFormation] template to use with
+automation software.
+
+After configuring {beatname_uc}, use the following command to export the 
+CloudFormation template:
+
+*linux and mac:*
+
+["source","sh",subs="attributes"]
+----------------------------------------------------------------------
+./{beatname_lc} export function FUNCTION_NAME
+----------------------------------------------------------------------
+
+*win:*
+
+["source","sh",subs="attributes"]
+----------------------------------------------------------------------
+.{backslash}{beatname_lc}.exe export function FUNCTION_NAME
+----------------------------------------------------------------------
