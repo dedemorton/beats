@@ -1,0 +1,98 @@
+[[elastic-log-driver-installation]]
+== Install and configure the {beatname_uc}
+
+++++
+<titleabbrev>Install and configure</titleabbrev>
+++++
+
+experimental[]
+
+Describe how to install the elastic log driver here.
+
+=== Before you begin
+
+Make sure your system meets the following requirements:
+
+* Docker: {docker-version}
+* {stack}: Version 7.6 and later
+* Anything else??
+
+=== Step 1: Install the {beatname_uc} plugin
+
+//REVIEWERS: Do we want to document how to build/install from source too?
+
+1. Install the plugin from the Docker store:
++
+[source,shell,subs="attributes"]
+----
+docker plugin install store/elastic/elastic-logging-driver:{version} --alias <fill in>
+----
+
+2. If necessary, enable the plugin:
++
+[source,shell]
+----
+docker plugin enable elastic/elastic-logging-driver
+----
+
+3. Verify that the plugin is installed and enabled:
++
+[source,shell]
+----
+docker plugin ls
+----
++
+The output should say something like:
++
+[source,shell,subs="attributes"]
+----
+ID                  NAME                                   DESCRIPTION              ENABLED
+c2ff9d2cf090        elastic/elastic-logging-plugin:{version}   A beat for docker logs   true
+----
+
+=== Step 2: Configure {beatname_uc}
+
+You can set configuration options for a single container, or for all containers
+running on the host. See <<elastic-log-driver-configuration>> for a list of
+supported configuration options.
+
+* To configure a single container, pass configuration parameters at run time
+when you start the container. For example:
++
+[source,shell,subs="attributes"]
+----
+docker run --log-driver=elastic/elastic-logging-plugin:{version}
+           --log-opt output.elasticsearch.hosts="https://2914my6b2c144a599d3394b73a2a679.us-central1.gcp.cloud.es.io:9243"
+           --log-opt output.elasticsearch.username="myusername"
+           --log-opt output.elasticsearch.password="myusername"
+           --log-opt output.elasticsearch.index="myindex" -it debian /bin/bash
+----
+
+* To configure all containers running on the host, set configuration parameters
+in the `daemon.json` file. For example:
++
+[source,json]
+----
+{
+  "log-driver": "elastic/elastic-logging-plugin",
+  "log-opts": {
+    "output.elasticsearch.hosts": "<elasticsearch_url:port>",
+    "output.elasticsearch.username": "myusername",
+    "output.elasticsearch.password":"mypassword",
+    "output.elasticsearch.index": "myindex"
+  }
+}
+----
++
+Then run the plugin:
++
+[source,shell]
+----
+docker run --log-driver=elastic/elastic-logging-plugin:{version}
+           --config-file=/etc/docker/daemon.json <1>
+----
+<1> The default location of the configuration file varies by platform. To
+specify a different location, set the `--config-file` flag. For more
+information about the Docker daemon configuration file, see the
+https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file[Docker docs].
+ 
