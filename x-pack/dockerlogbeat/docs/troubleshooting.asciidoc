@@ -1,4 +1,7 @@
 [[elastic-log-driver-troubleshooting]]
-== Troubleshooting
+== Troubleshootin
+
+experimental[]
+
 
 TODO: Move content about troubleshooting from readme to this section.
