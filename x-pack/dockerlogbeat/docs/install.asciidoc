@@ -80,7 +80,7 @@ in the `daemon.json` file. For example:
   "log-opts": {
     "output.elasticsearch.hosts": "192.0.2.0:9200",
     "output.elasticsearch.username": "myusername",
-    "output.elasticsearch.password":"mypassword",
+    "output.elasticsearch.password": "mypassword",
     "output.elasticsearch.index": "myindex"
   }
 }
