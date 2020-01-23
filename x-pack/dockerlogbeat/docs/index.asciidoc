@@ -2,6 +2,7 @@
 
 :libbeat-dir: {docdir}/../../../libbeat/docs
 :elastic-log-driver: Elastic Log Driver
+:elastic-log-driver-long: Elastic Log Driver for Docker
 :docker-version: ???
 
 include::{libbeat-dir}/version.asciidoc[]

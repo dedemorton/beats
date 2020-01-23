@@ -7,10 +7,10 @@
 
 experimental[]
 
-Use the following options to configure the {elastic-log-driver}. You can pass these
-options through the `--log-opt` flag when you start a container, or set them in
-the `daemon.json` file for all containers. For detailed examples, see
-<<elastic-log-driver-usage-examples>>.
+Use the following options to configure the {elastic-log-driver-long}. You can
+pass these options through the `--log-opt` flag when you start a container, or
+set them in the `daemon.json` file for all containers. For detailed examples,
+see <<elastic-log-driver-usage-examples>>.
 
 // I'm not sure at this point if we want to have the usage examples inline in
 // this topic or in a separate topic. Depends on how many options we decide to
