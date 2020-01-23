@@ -1,5 +1,5 @@
 [[elastic-log-driver-usage-examples]]
-== {beatname_uc} usage examples
+== {elastic-log-driver} usage examples
 
 ++++
 <titleabbrev>Usage examples</titleabbrev>
@@ -8,4 +8,4 @@
 experimental[]
 
 This topic provides shows the command line and JSON syntax for passing options
-to {beatname_uc}.
+to {elastic-log-driver}.

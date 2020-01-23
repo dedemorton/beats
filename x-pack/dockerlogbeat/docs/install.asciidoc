@@ -1,5 +1,5 @@
 [[elastic-log-driver-installation]]
-== Install and configure the {beatname_uc}
+== Install and configure the {elastic-log-driver}
 
 ++++
 <titleabbrev>Install and configure</titleabbrev>
@@ -7,17 +7,17 @@
 
 experimental[]
 
-Describe how to install the elastic log driver here.
-
 === Before you begin
 
 Make sure your system meets the following requirements:
 
 * Docker: {docker-version}
-* {stack}: Version 7.6 and later
+* {stack}: Version {version} and later
 * Anything else??
 
-=== Step 1: Install the {beatname_uc} plugin
+//Do we want to add a step for setting up a cloud trial? 
+
+=== Step 1: Install the {elastic-log-driver} plugin
 
 //REVIEWERS: Do we want to document how to build/install from source too?
 
@@ -50,7 +50,7 @@ ID                  NAME                                   DESCRIPTION          
 c2ff9d2cf090        elastic/elastic-logging-plugin:{version}   A beat for docker logs   true
 ----
 
-=== Step 2: Configure {beatname_uc}
+=== Step 2: Configure {elastic-log-driver}
 
 You can set configuration options for a single container, or for all containers
 running on the host. See <<elastic-log-driver-configuration>> for a list of

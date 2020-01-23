@@ -1,8 +1,8 @@
 = Elastic Log Driver for Docker
 
 :libbeat-dir: {docdir}/../../../libbeat/docs
-:beatname_lc: dockerlogbeat
-:beatname_uc: Elastic Log Driver
+:elastic-log-driver: Elastic Log Driver
+:docker-version: ???
 
 include::{libbeat-dir}/version.asciidoc[]
 

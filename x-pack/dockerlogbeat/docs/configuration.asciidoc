@@ -1,5 +1,5 @@
 [[elastic-log-driver-configuration]]
-== {beatname_uc} configuration options
+== {elastic-log-driver} configuration options
 
 ++++
 <titleabbrev>Configuration options</titleabbrev>
@@ -7,5 +7,142 @@
 
 experimental[]
 
-This topic provides an alphabetized ?? list of configuration options, possibly
-grouped into tables by type of option.
+Use the following options to configure the {elastic-log-driver}. You can pass these
+options through the `--log-opt` flag when you start a container, or set them in
+the `daemon.json` file for all containers. For detailed examples, see
+<<elastic-log-driver-usage-examples>>.
+
+// I'm not sure at this point if we want to have the usage examples inline in
+// this topic or in a separate topic. Depends on how many options we decide to
+// document.
+
+
+=== {es} output options
+
+// Here I provide some streamlined descriptions. This is not complete coverage
+// of all the settings; mainly an example. 
+//
+// Haven't added ssl options here because it's gonna be messy.
+
+
+[options="header"]
+|=====
+|Option  | Description | Default
+
+3+|*To send logs to {ess} on {ecloud}:*
+
+|`cloud.id`
+|The Cloud ID found in the Elastic Cloud web console. This ID is
+used to resolve the {stack} URLs when connecting to {ess} on {ecloud}.
+|
+
+|`cloud.auth`
+|The username and password combination for connecting to {ess} on {ecloud}. The
+format is `"username:password"`.
+|
+
+|`output.elasticsearch.index`
+|The index to write events to when you're using daily indices. For example:
++"dockerlogs-%{+yyyy.MM.dd}"+. This option accepts
+{beats-ref}/config-file-format-type.html#_format_string_sprintf[format strings].
+|
+
+3+|*To send logs to {es} running on your hardware:*
+
+|`output.elasticsearch.hosts`
+|The list of {es} nodes to connect to. Specify
+each node as a `URL` or `IP:PORT`.
+|`"localhost:9200"`
+
+|`output.elasticsearch.protocol`
+|The protocol that {es} is reachable on: `http` or `https`. If you specify the
+protocol in the hosts setting, it overrides whatever is specified here.
+|`http` 
+
+|`output.elasticsearch.username`
+|The basic authentication username for connecting to {es}. 
+|
+
+|`output.elasticsearch.password`
+|The basic authentication password for connecting to {es}.
+|
+
+|`output.elasticsearch.index`
+|The index to write events to when you're using daily indices. For example:
++"dockerlogs-%{+yyyy.MM.dd}"+. This option accepts
+{beats-ref}/config-file-format-type.html#_format_string_sprintf[format strings].
+|
+
+3+|*Advanced options:*
+
+|`output.elasticsearch.compression_level`
+|The gzip compression level. Set to 0 to disable compression. Valid compression
+levels range from 1 (best speed) to 9 (best compression). Increasing the
+compression level reduces network usage, but increases CPU usage.
+|0
+
+|`output.elasticsearch.escape_html`
+|Whether to escape HTML in strings.
+|`false`
+
+|`output.elasticsearch.headers`
+|Custom HTTP headers to add to each request created by the {es} output. Specify
+multiple header values for the same header name by separating them with a comma.
+|
+
+|`output.elasticsearch.parameters`
+| A dictionary of HTTP parameters to pass within the URL with index operations.
+| 
+
+|`output.elasticsearch.path`
+|An HTTP path prefix that is prepended to the HTTP API calls. This is useful for
+cases where {es} listens behind an HTTP reverse proxy that exports the API under
+a custom prefix.
+|
+
+|`output.elasticsearch.pipeline`
+|A format string value that specifies the ingest node pipeline to write events
+to. This option accepts
+{beats-ref}/config-file-format-type.html#_format_string_sprintf[format strings].
+|
+
+|`output.elasticsearch.proxy_url`
+|The URL of the proxy to use when connecting to the {es} servers. The
+value may be either a complete URL or a "host[:port]", in which case the "http"
+scheme is assumed. If a value is not specified through the configuration file
+then proxy environment variables are used. See the
+https://golang.org/pkg/net/http/#ProxyFromEnvironment[Go documentation]
+for more information about the environment variables.
+|
+
+|`output.elasticsearch.worker`
+|The number of workers per configured host publishing events to {es}. Use with
+load balancing mode enabled. Example: If you have 2 hosts and 3 workers,
+in total 6 workers are started (3 for each host).
+|1
+
+|=====
+
+//Settings missing from the above table. Before I put effort into streamlining
+//the descriptions, I want to make sure we are using htem. 
+//output.elasticsearch.indices
+//`output.elasticsearch.ilm
+//`output.elasticsearch.pipelines`
+//`output.elasticsearch.max_retries` - not sure if Elastic Log Driver supports this or retries indefinitely.
+//`output.elasticsearch.bulk_max_size`
+//`output.elasticsearch.backoff.init`
+//`output.elasticsearch.backoff.max`
+//`output.elasticsearch.timeout`
+
+=== {ls} output options
+
+Add LS output options here
+
+==== Advanced {ls} output options
+
+Add advanced LS output options here
+
+=== Logging options
+
+Add logging options here.
+
