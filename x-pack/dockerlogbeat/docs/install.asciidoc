@@ -28,11 +28,13 @@ Make sure your system meets the following requirements:
 docker plugin install store/elastic/elastic-logging-driver:{version} --alias <fill in>
 ----
 
+//TODO: Replace the above command with the correct details.
+
 2. If necessary, enable the plugin:
 +
 [source,shell]
 ----
-docker plugin enable elastic/elastic-logging-driver
+docker plugin enable elastic/elastic-logging-driver:{version}
 ----
 
 3. Verify that the plugin is installed and enabled:
@@ -62,7 +64,7 @@ when you start the container. For example:
 [source,shell,subs="attributes"]
 ----
 docker run --log-driver=elastic/elastic-logging-plugin:{version}
-           --log-opt output.elasticsearch.hosts="https://2914my6b2c144a599d3394b73a2a679.us-central1.gcp.cloud.es.io:9243"
+           --log-opt output.elasticsearch.hosts="192.0.2.0:9200"
            --log-opt output.elasticsearch.username="myusername"
            --log-opt output.elasticsearch.password="myusername"
            --log-opt output.elasticsearch.index="myindex" -it debian /bin/bash
@@ -71,12 +73,12 @@ docker run --log-driver=elastic/elastic-logging-plugin:{version}
 * To configure all containers running on the host, set configuration parameters
 in the `daemon.json` file. For example:
 +
-[source,json]
+[source,json,subs="attributes"]
 ----
 {
-  "log-driver": "elastic/elastic-logging-plugin",
+  "log-driver": "elastic/elastic-logging-plugin:{version}",
   "log-opts": {
-    "output.elasticsearch.hosts": "<elasticsearch_url:port>",
+    "output.elasticsearch.hosts": "192.0.2.0:9200",
     "output.elasticsearch.username": "myusername",
     "output.elasticsearch.password":"mypassword",
     "output.elasticsearch.index": "myindex"
