@@ -68,7 +68,7 @@ https://www.elastic.co/downloads/beats/elastic-agent[downloads page].
 
 . Open a PowerShell prompt as an Administrator (right-click the PowerShell icon and select *Run As Administrator*).
 
-. From the PowerShell prompt, run the following commands to install Filebeat as a
+. From the PowerShell prompt, run the following commands to install {agent} as a
 Windows service:
 +
 [source,shell]
