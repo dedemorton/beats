@@ -9101,7 +9101,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -14609,7 +14609,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -27476,7 +27476,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -34163,7 +34163,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -39597,7 +39597,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -55171,7 +55171,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -60605,7 +60605,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -74594,7 +74594,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -80028,7 +80028,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -85859,7 +85859,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -93442,7 +93442,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -110662,7 +110662,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -118990,7 +118990,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -124455,7 +124455,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -130166,7 +130166,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -135958,7 +135958,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -141392,7 +141392,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -148713,7 +148713,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -157474,7 +157474,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 
@@ -170245,7 +170245,7 @@ type: keyword
 *`rsa.endpoint.host_state`*::
 +
 --
-This key is used to capture the current state of the machine, such as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
+This key is used to capture the current state of the machine, such as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall disabled</strong> and so on
 
 type: keyword
 

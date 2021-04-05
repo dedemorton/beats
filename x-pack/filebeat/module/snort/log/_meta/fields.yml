@@ -2625,7 +2625,7 @@
       overwrite: true
       type: keyword
       description: This key is used to capture the current state of the machine, such
-        as <strong>blacklisted</strong>, <strong>infected</strong>, <strong>firewall
+        as <strong>blocklisted</strong>, <strong>infected</strong>, <strong>firewall
         disabled</strong> and so on
     - name: registry_key
       overwrite: true

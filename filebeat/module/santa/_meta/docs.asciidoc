@@ -4,9 +4,8 @@
 == Santa module
 
 The +{modulename}+ module collects and parses logs from
-https://github.com/google/santa[Google Santa], a security
-tool for macOS that monitors process executions and can blacklist/whitelist
-binaries.
+https://github.com/google/santa[Google Santa], binary authorization system for
+macOS.
 
 include::../include/what-happens.asciidoc[]
 
